@@ -1,13 +1,14 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pixel Agents - Standalone</title>
-    <script type="module" crossorigin src="./assets/index-BTCFuRMK.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-C0_Jd-v0.css">
-    <style>
+
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;link rel="icon" type="image/svg+xml" href="/vite.svg" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;title&gt;Pixel Agents - Standalone&lt;/title&gt;
+    &lt;script type="module" crossorigin src="./assets/index-BTCFuRMK.js"&gt;&lt;/script&gt;
+    &lt;link rel="stylesheet" crossorigin href="./assets/index-C0_Jd-v0.css"&gt;
+    &lt;style&gt;
       :root {
         --vscode-foreground: #cccccc;
         --pixel-bg: #1e1e1e;
@@ -45,16 +46,16 @@
       #loading .progress { width: 400px; height: 20px; background: #333; border-radius: 0; overflow: hidden; }
       #loading .bar { height: 100%; background: #007acc; width: 0%; transition: width 0.3s; }
       #loading .text { margin-top: 15px; font-size: 18px; }
-    </style>
-  </head>
-  <body>
-    <div id="loading">
-      <h1>Pixel Agents</h1>
-      <div class="progress"><div class="bar" id="progress-bar"></div></div>
-      <div class="text" id="loading-text">Loading furniture assets...</div>
-    </div>
-    <div id="root"></div>
-    <script>
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="loading"&gt;
+      &lt;h1&gt;Pixel Agents&lt;/h1&gt;
+      &lt;div class="progress"&gt;&lt;div class="bar" id="progress-bar"&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class="text" id="loading-text"&gt;Loading furniture assets...&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div id="root"&gt;&lt;/div&gt;
+    &lt;script&gt;
 (function() {
   'use strict';
 
@@ -73,9 +74,9 @@
   const PNG_ALPHA_THRESHOLD = 16;
 
   function rgbaToHex(r, g, b, a) {
-    if (a < PNG_ALPHA_THRESHOLD) return '';
+    if (a &lt; PNG_ALPHA_THRESHOLD) return '';
     var rgb = '#' + r.toString(16).padStart(2, '0') + g.toString(16).padStart(2, '0') + b.toString(16).padStart(2, '0').toUpperCase();
-    if (a >= 255) return rgb;
+    if (a &gt;= 255) return rgb;
     return rgb + a.toString(16).padStart(2, '0').toUpperCase();
   }
 
@@ -97,9 +98,9 @@
         var imageData = ctx.getImageData(0, 0, width, height);
         var data = imageData.data;
         var sprite = [];
-        for (var y = 0; y < height; y++) {
+        for (var y = 0; y &lt; height; y++) {
           var row = [];
-          for (var x = 0; x < width; x++) {
+          for (var x = 0; x &lt; width; x++) {
             var pixelIndex = (y * width + x) * 4;
             var r = data[pixelIndex];
             var g = data[pixelIndex + 1];
@@ -149,7 +150,7 @@
     var group = node;
     var results = [];
 
-    for (var i = 0; i < group.members.length; i++) {
+    for (var i = 0; i &lt; group.members.length; i++) {
       var member = group.members[i];
       var childProps = {
         groupId: inherited.groupId,
@@ -164,7 +165,7 @@
       if (inherited.rotationScheme) childProps.rotationScheme = inherited.rotationScheme;
       if (inherited.animationGroup) childProps.animationGroup = inherited.animationGroup;
 
-      if (group.groupType === 'rotation' && group.rotationScheme) {
+      if (group.groupType === 'rotation' &amp;&amp; group.rotationScheme) {
         childProps.rotationScheme = group.rotationScheme;
       }
 
@@ -186,12 +187,12 @@
         }
       }
 
-      if (group.orientation && !childProps.orientation) {
+      if (group.orientation &amp;&amp; !childProps.orientation) {
         childProps.orientation = group.orientation;
       }
 
       var memberResults = flattenManifest(member, childProps);
-      for (var j = 0; j < memberResults.length; j++) {
+      for (var j = 0; j &lt; memberResults.length; j++) {
         results.push(memberResults[j]);
       }
     }
@@ -211,7 +212,7 @@
       'SOFA', 'TABLE_FRONT', 'WHITEBOARD', 'WOODEN_BENCH', 'WOODEN_CHAIR'
     ];
 
-    for (var i = 0; i < furnitureTypes.length; i++) {
+    for (var i = 0; i &lt; furnitureTypes.length; i++) {
       var type = furnitureTypes[i];
       try {
         var manifestRes = await fetch('./assets/furniture/' + type + '/manifest.json');
@@ -258,7 +259,7 @@
             assets = flattenManifest(rootGroup, inherited);
           }
 
-          for (var j = 0; j < assets.length; j++) {
+          for (var j = 0; j &lt; assets.length; j++) {
             var asset = assets[j];
             try {
               var spriteData = await loadPngToSpriteData(
@@ -299,24 +300,24 @@
     var CHAR_FRAMES_PER_ROW = 7;
     var CHARACTER_DIRECTIONS = ['down', 'up', 'right'];
 
-    for (var ci = 0; ci < CHAR_COUNT; ci++) {
+    for (var ci = 0; ci &lt; CHAR_COUNT; ci++) {
       try {
         var fullSprite = await loadPngToSpriteData('./assets/characters/char_' + ci + '.png', 112, 96);
 
         var charData = { down: [], up: [], right: [] };
 
-        for (var dirIdx = 0; dirIdx < CHARACTER_DIRECTIONS.length; dirIdx++) {
+        for (var dirIdx = 0; dirIdx &lt; CHARACTER_DIRECTIONS.length; dirIdx++) {
           var dir = CHARACTER_DIRECTIONS[dirIdx];
           var rowOffsetY = dirIdx * CHAR_FRAME_H;
           var frames = [];
 
-          for (var f = 0; f < CHAR_FRAMES_PER_ROW; f++) {
+          for (var f = 0; f &lt; CHAR_FRAMES_PER_ROW; f++) {
             var frame = [];
             var frameOffsetX = f * CHAR_FRAME_W;
 
-            for (var y = 0; y < CHAR_FRAME_H; y++) {
+            for (var y = 0; y &lt; CHAR_FRAME_H; y++) {
               var row = [];
-              for (var x = 0; x < CHAR_FRAME_W; x++) {
+              for (var x = 0; x &lt; CHAR_FRAME_W; x++) {
                 row.push(fullSprite[rowOffsetY + y][frameOffsetX + x]);
               }
               frame.push(row);
@@ -365,14 +366,14 @@
         var fullSprite = await loadPngToSpriteData('./assets/walls/wall_' + wi + '.png', 64, 128);
         var wallSet = [];
 
-        for (var mask = 0; mask < WALL_BITMASK_COUNT; mask++) {
+        for (var mask = 0; mask &lt; WALL_BITMASK_COUNT; mask++) {
           var ox = (mask % WALL_GRID_COLS) * WALL_PIECE_WIDTH;
           var oy = Math.floor(mask / WALL_GRID_COLS) * WALL_PIECE_HEIGHT;
           var sprite = [];
 
-          for (var r = 0; r < WALL_PIECE_HEIGHT; r++) {
+          for (var r = 0; r &lt; WALL_PIECE_HEIGHT; r++) {
             var row = [];
-            for (var c = 0; c < WALL_PIECE_WIDTH; c++) {
+            for (var c = 0; c &lt; WALL_PIECE_WIDTH; c++) {
               row.push(fullSprite[oy + r][ox + c]);
             }
             sprite.push(row);
@@ -491,6 +492,7 @@
     init();
   }
 })();
-    </script>
-  </body>
-</html>
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+
